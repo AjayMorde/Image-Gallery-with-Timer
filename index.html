@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Gallery with Timer and Carousel</title>
+   <style>
+    #imageGallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+img {
+    position: relative;
+    top: 100px;
+  display: none;
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+   </style>
+  </head>
+  <body>
+    <div id="imageGallery">
+      <img src="image1.jpg">
+      <img src="image2.jpg">
+      <img src="image3.jpg">
+      <img src="image4.jpg">
+      <img src="image5.jpg">
+   
+    </div>
+    <div id="timer"></div>
+   <script>
+ 
+const gallery = document.getElementById("imageGallery");
+
+const images = gallery.getElementsByTagName("img");
+
+
+let currentIndex = 0;
+
+const intervalTime = 5000;
+
+
+let countdown = 10;
+
+function nextImage() {
+
+  images[currentIndex].style.display = "none";
+
+ 
+  currentIndex = (currentIndex + 1) % images.length;
+
+  images[currentIndex].style.display = "block";
+}
+
+images[currentIndex].style.display = "block";
+
+
+setInterval(nextImage, intervalTime);
+
+setInterval(function() {
+  
+  countdown--;
+
+  const timerDisplay = document.getElementById("timer");
+  timerDisplay.textContent = countdown;
+
+
+  if (countdown === 0) {
+    nextImage();
+    countdown = 10;
+  }
+}, 1000);
+
+   </script>
+  </body>
+</html>
